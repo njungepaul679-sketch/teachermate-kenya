@@ -129,5 +129,22 @@
     <p>Your Everyday Teaching Companion.</p>
     <p>© 2026 TeacherMate Kenya. All rights reserved.</p>
   </footer>
+  
+<script>
+  const searchBox = document.getElementById("resourceSearch");
+  const resourceCards = document.querySelectorAll("#resources .card");
+
+  if (searchBox) {
+    searchBox.addEventListener("input", function () {
+      const query = this.value.toLowerCase().trim();
+
+      resourceCards.forEach(function (card) {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? "" : "none";
+      });
+    });
+  }
+</script>
+
 </body>
 </html>
