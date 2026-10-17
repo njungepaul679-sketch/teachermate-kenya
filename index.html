@@ -215,8 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gradeFilter = document.getElementById("gradeFilter");
   const subjectFilter = document.getElementById("subjectFilter");
   const resourceCards = document.querySelectorAll("#resources .card");
-
- 
+  
 function filterResources() {
   const query = searchBox.value.toLowerCase().trim();
   const grade = gradeFilter.value.toLowerCase();
@@ -244,8 +243,8 @@ searchBox.addEventListener("input", filterResources);
 gradeFilter.addEventListener("change", filterResources);
 subjectFilter.addEventListener("change", filterResources);
 
- 
 
+ 
 
 
 </body>
