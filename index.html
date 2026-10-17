@@ -210,8 +210,7 @@
   </footer>
   
 <script>
- 
-<script>
+document.addEventListener("DOMContentLoaded", function () {
   const searchBox = document.getElementById("resourceSearch");
   const gradeFilter = document.getElementById("gradeFilter");
   const subjectFilter = document.getElementById("subjectFilter");
@@ -222,7 +221,7 @@
     const grade = gradeFilter.value.toLowerCase();
     const subject = subjectFilter.value.toLowerCase();
 
-    resourceCards.forEach(function(card) {
+    resourceCards.forEach(function (card) {
       const text = card.textContent.toLowerCase();
 
       const matchesSearch = text.includes(query);
@@ -230,14 +229,20 @@
       const matchesSubject = !subject || text.includes(subject);
 
       card.style.display =
-        matchesSearch && matchesGrade && matchesSubject ? "" : "none";
+        matchesSearch && matchesGrade && matchesSubject
+          ? ""
+          : "none";
     });
   }
 
   searchBox.addEventListener("input", filterResources);
   gradeFilter.addEventListener("change", filterResources);
   subjectFilter.addEventListener("change", filterResources);
+});
 </script>
+
+ 
+
 
 
 </body>
