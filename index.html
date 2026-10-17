@@ -6,40 +6,257 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="TeacherMate Kenya - CBC revision papers and learning resources for Grades 1 to 9.">
   <title>TeacherMate Kenya | CBC Learning Resources</title>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; color: #18312b; background: #f7faf8; line-height: 1.6; }
-    header { background: #075c46; color: white; padding: 18px 6%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .brand { font-size: 1.35rem; font-weight: bold; }
-    nav a { color: white; text-decoration: none; margin-left: 16px; font-size: .95rem; }
-    .hero { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 32px; padding: 55px 6%; }
-    .hero h1 { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.15; margin-bottom: 18px; }
-    .hero p { color: #52645d; margin-bottom: 22px; }
-    .btn { display: inline-block; background: #f2bd42; color: #18312b; text-decoration: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; }
-    .hero img { width: 100%; height: 320px; object-fit: cover; border-radius: 18px; }
-    .section { padding: 38px 6%; }
-    .section h2 { margin-bottom: 8px; font-size: 1.8rem; }
-    .muted { color: #64746d; margin-bottom: 22px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 18px #18312b12; }
-    .card img { width: 100%; height: 175px; object-fit: cover; display: block; }
-    .card-content { padding: 18px; }
-    .card h3 { margin-bottom: 8px; }
-    .price { color: #087451; font-weight: bold; margin: 12px 0; }
-    .card a { color: #087451; font-weight: bold; text-decoration: none; }
-    .grades { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-    .grade { background: #e2f2e9; color: #075c46; padding: 10px 15px; border-radius: 8px; font-weight: bold; }
-    .notice { background: #fff4d7; padding: 18px; border-radius: 10px; margin-top: 20px; }
-    footer { background: #073e32; color: white; padding: 28px 6%; margin-top: 30px; }
-    footer a { color: #ffdc7c; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: #18312b;
+      background: #f7faf8;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #075c46;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand {
+      font-size: 1.35rem;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 32px;
+      padding: 55px 6%;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      color: #52645d;
+      margin-bottom: 22px;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #f2bd42;
+      color: #18312b;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .section {
+      padding: 38px 6%;
+    }
+
+    .section h2 {
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+
+    .muted {
+      color: #64746d;
+      margin-bottom: 22px;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .filters input,
+    .filters select {
+      width: 100%;
+      min-width: 0;
+      padding: 13px;
+      border: 1px solid #cbd5d0;
+      border-radius: 8px;
+      background: white;
+      color: #18312b;
+      font-size: 16px;
+    }
+
+    .filters input {
+      grid-column: 1 / -1;
+    }
+
+    .filters input:focus,
+    .filters select:focus {
+      outline: 2px solid #087451;
+      outline-offset: 2px;
+    }
+
+    .results-count {
+      color: #64746d;
+      margin: -12px 0 20px;
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px #18312b12;
+      min-width: 0;
+    }
+
+    .card[hidden] {
+      display: none !important;
+    }
+
+    .card img {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 18px;
+    }
+
+    .card h3 {
+      margin: 8px 0;
+    }
+
+    .card-content p {
+      margin-bottom: 8px;
+    }
+
+    .price {
+      color: #087451;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+
+    .card a {
+      color: #087451;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .card a:hover {
+      text-decoration: underline;
+    }
+
+    .grades {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .grade {
+      background: #e2f2e9;
+      color: #075c46;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .notice {
+      background: #fff4d7;
+      padding: 18px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    footer {
+      background: #073e32;
+      color: white;
+      padding: 28px 6%;
+      margin-top: 30px;
+    }
+
+    footer a {
+      color: #ffdc7c;
+    }
+
     @media (max-width: 700px) {
-      .hero { grid-template-columns: 1fr; padding-top: 32px; }
-      .hero img { height: 240px; }
-      .grid { grid-template-columns: 1fr; }
-      nav a { margin-left: 0; margin-right: 12px; }
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 32px;
+      }
+
+      .hero img {
+        height: 240px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .filters input {
+        grid-column: auto;
+      }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="brand">🇰🇪 TeacherMate Kenya</div>
@@ -50,127 +267,240 @@
       <a href="#contact">Contact</a>
     </nav>
   </header>
-    <section class="section" id="resources">
-      <div style="margin-bottom: 24px;">
-  <input
-    type="search"
-    id="resourceSearch"
-    placeholder="Search CBC papers by grade, subject..."
-    style="width:100%;padding:14px;border:1px solid #ccc;border-radius:8px;font-size:16px;"
-  >
-<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-  
-<select id="gradeFilter" style="flex:1;min-width:140px;padding:12px;border:1px solid #ccc;border-radius:8px;">
-  <option value="">All Grades</option>
-  <option value="grade 1">Grade 1</option>
-  <option value="grade 2">Grade 2</option>
-  <option value="grade 3">Grade 3</option>
-  <option value="grade 4">Grade 4</option>
-  <option value="grade 5">Grade 5</option>
-  <option value="grade 6">Grade 6</option>
-  <option value="grade 7">Grade 7</option>
-  <option value="grade 8">Grade 8</option>
-  <option value="grade 9">Grade 9</option>
-</select>
-<main>
+
+  <main>
     <section class="hero" id="home">
       <div>
         <p><strong>Your Everyday Teaching Companion</strong></p>
         <h1>Learn better. Teach smarter.</h1>
-        <p>Discover CBC revision papers and learning resources for Kenyan learners in Grades 1–9.</p>
+        <p>
+          Discover CBC revision papers and learning resources
+          for Kenyan learners in Grades 1–9.
+        </p>
         <a class="btn" href="#resources">Explore Resources →</a>
       </div>
-      <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80" alt="Learners studying together">
+
+      <img
+        src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=80"
+        alt="Learners studying together">
     </section>
-</div>
+
+    <section class="section" id="resources">
       <h2>Explore Learning Resources</h2>
-      <p class="muted">Affordable resources to support learning and revision.</p>
-      <div class="grid">
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=700&q=80" alt="Books and study materials">
-         <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=700&q=80" alt="Grade 5 Agriculture revision materials">
+      <p class="muted">
+        Find affordable resources by grade, subject, or name.
+      </p>
 
-<div class="card-content">
-  <p>Grade 5 • Agriculture</p>
-  <h3>Grade 5 Agriculture Revision Paper</h3>
-  <p>CBC practice questions to help learners revise Agriculture.</p>
-  <p class="price">KSh 50</p>
-  <a href="#contact">View Purchase Options →</a>
-</div><div class="card">
-  <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=80"
-       alt="Learners studying Social Studies"
-       style="width:100%;height:200px;object-fit:cover;">
+      <div class="filters">
+        <input
+          type="search"
+          id="resourceSearch"
+          placeholder="Search by resource, grade, or subject..."
+          aria-label="Search learning resources">
 
-  <div class="card-content">
-    <p>Grade 5 • Social Studies</p>
-    <h3>Grade 5 Social Studies Revision Paper</h3>
-    <p>CBC practice questions covering citizenship, resources and economic activities.</p>
-    <p class="price">KSh 50</p>
-    <a href="#contact">View Purchase Options →</a>
-  </div>
-</div>
-        </article><article class="card">
-  <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=80"
-       alt="Learners studying together">
-  <div class="card-content">
-    <p>Grade 5 • Social Studies</p>
-    <h3>Grade 5 Social Studies Revision Paper</h3>
-    <p>CBC practice questions on citizenship, resources and economic activities.</p>
-    <p class="price">KSh 50</p>
-    <a href="#contact">View Purchase Options →</a>
-  </div>
-          
-<article class="card">
-  <img src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=700&q=80"
-       alt="Mathematics learning materials">
-  <div class="card-content">
-    <p>Grade 4 • Mathematics</p>
-    <h3>Grade 4 Mathematics Revision Paper</h3>
-    <p>CBC practice questions to strengthen number skills and problem-solving.</p>
-    <p class="price">KSh 50</p>
-    <a href="#contact">View Purchase Options →</a>
-  </div>
-</article>
+        <select id="gradeFilter" aria-label="Filter by grade">
+          <option value="">All Grades</option>
+          <option value="1">Grade 1</option>
+          <option value="2">Grade 2</option>
+          <option value="3">Grade 3</option>
+          <option value="4">Grade 4</option>
+          <option value="5">Grade 5</option>
+          <option value="6">Grade 6</option>
+          <option value="7">Grade 7</option>
+          <option value="8">Grade 8</option>
+          <option value="9">Grade 9</option>
+        </select>
 
-</article>
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=700&q=80" alt="Writing and revision">
+        <select id="subjectFilter" aria-label="Filter by subject">
+          <option value="">All Subjects</option>
+          <option value="english">English</option>
+          <option value="kiswahili">Kiswahili</option>
+          <option value="mathematics">Mathematics</option>
+          <option value="science and technology">Science and Technology</option>
+          <option value="social studies">Social Studies</option>
+          <option value="agriculture">Agriculture</option>
+          <option value="creative arts">Creative Arts</option>
+          <option value="french">French</option>
+        </select>
+      </div>
+
+      <p class="results-count" id="resultsCount" aria-live="polite">
+        Showing all resources
+      </p>
+
+      <div class="grid" id="resourceGrid">
+
+        <article class="card" data-grade="5" data-subject="agriculture">
+          <img
+            src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=700&q=80"
+            alt="Books and study materials">
+
           <div class="card-content">
-            <h3>Marking Schemes</h3>
-            <p>Answers to help learners check their work.</p>
-            <p class="price">From KSh 30</p>
-            <a href="#contact">Learn more →</a>
+            <p>Grade 5 • Agriculture</p>
+            <h3>Grade 5 Agriculture Revision Paper</h3>
+            <p>CBC practice questions to help learners revise Agriculture.</p>
+            <p class="price">KSh 50</p>
+            <a href="#contact">View Purchase Options →</a>
           </div>
         </article>
-        <article class="card">
-          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=80" alt="Teacher supporting learners">
+
+        <article class="card" data-grade="5" data-subject="social studies">
+          <img
+            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=80"
+            alt="Learners studying Social Studies">
+
           <div class="card-content">
-            <h3>Teaching Resources</h3>
+            <p>Grade 5 • Social Studies</p>
+            <h3>Grade 5 Social Studies Revision Paper</h3>
+            <p>CBC practice questions covering citizenship, resources and economic activities.</p>
+            <p class="price">KSh 50</p>
+            <a href="#contact">View Purchase Options →</a>
+          </div>
+        </article>
+
+        <article class="card" data-grade="4" data-subject="mathematics">
+          <img
+            src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=700&q=80"
+            alt="Mathematics learning materials">
+
+          <div class="card-content">
+            <p>Grade 4 • Mathematics</p>
+            <h3>Grade 4 Mathematics Revision Paper</h3>
+            <p>CBC practice questions to strengthen number skills and problem-solving.</p>
+            <p class="price">KSh 50</p>
+            <a href="#contact">View Purchase Options →</a>
+          </div>
+        </article>
+
+        <article class="card" data-grade="5" data-subject="english">
+          <img
+            src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=700&q=80"
+            alt="English writing and revision">
+
+          <div class="card-content">
+            <p>Grade 5 • English</p>
+            <h3>Grade 5 English Revision Paper</h3>
+            <p>Practice questions to strengthen grammar, reading and writing.</p>
+            <p class="price">KSh 50</p>
+            <a href="#contact">View Purchase Options →</a>
+          </div>
+        </article>
+
+        <article class="card" data-grade="5" data-subject="kiswahili">
+          <img
+            src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=700&q=80"
+            alt="Writing and language practice">
+
+          <div class="card-content">
+            <p>Grade 5 • Kiswahili</p>
+            <h3>Grade 5 Kiswahili Revision Paper</h3>
+            <p>Practice language skills and prepare for assessments.</p>
+            <p class="price">KSh 50</p>
+            <a href="#contact">View Purchase Options →</a>
+          </div>
+        </article>
+
+        <article class="card" data-grade="5" data-subject="science and technology">
+          <img
+            src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=700&q=80"
+            alt="Science learning materials">
+
+          <div class="card-content">
+            <p>Grade 5 • Science and Technology</p>
+            <h3>Grade 5 Science and Technology Revision Paper</h3>
+            <p>Practice questions to support science learning.</p>
+            <p class="price">KSh 50</p>
+            <a href="#contact">View Purchase Options →</a>
+          </div>
+        </article>
+
+        <article class="card" data-grade="5" data-subject="creative arts">
+          <img
+            src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=700&q=80"
+            alt="Art and creative activities">
+
+          <div class="card-content">
+            <p>Grade 5 • Creative Arts</p>
+            <h3>Grade 5 Creative Arts Revision Paper</h3>
+            <p>Revision activities for creative skills and appreciation.</p>
+            <p class="price">KSh 50</p>
+            <a href="#contact">View Purchase Options →</a>
+          </div>
+        </article>
+
+        <article class="card" data-grade="5" data-subject="french">
+          <img
+            src="https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=700&q=80"
+            alt="French language learning">
+
+          <div class="card-content">
+            <p>Grade 5 • French</p>
+            <h3>Grade 5 French Revision Paper</h3>
+            <p>Practice French vocabulary and language skills.</p>
+            <p class="price">KSh 50</p>
+            <a href="#contact">View Purchase Options →</a>
+          </div>
+        </article>
+
+        <article class="card" data-grade="5" data-subject="agriculture">
+          <img
+            src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=700&q=80"
+            alt="Revision answers and written work">
+
+          <div class="card-content">
+            <p>Grade 5 • Agriculture</p>
+            <h3>Agriculture Marking Scheme</h3>
+            <p>Answers to help learners check their revision work.</p>
+            <p class="price">KSh 30</p>
+            <a href="#contact">View Purchase Options →</a>
+          </div>
+        </article>
+
+        <article class="card" data-grade="" data-subject="">
+          <img
+            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=80"
+            alt="Teacher supporting learners">
+
+          <div class="card-content">
+            <h3>CBC Teaching Resources</h3>
             <p>Helpful materials for teachers planning CBC lessons.</p>
             <p class="price">Lesson plans from KSh 30</p>
-            <a href="#contact">Learn more →</a>
+            <a href="#contact">View Purchase Options →</a>
           </div>
         </article>
+
       </div>
-      <div class="notice">More resources will be added as the library grows. Product previews, secure payments and downloads will be connected in later steps.</div>
+
+      <p class="notice">
+        More resources will be added as the library grows.
+        Online payments and secure downloads will be connected separately.
+      </p>
     </section>
 
     <section class="section" id="grades">
-      <h2>Find resources by grade</h2>
-      <p class="muted">Choose the grade you need.</p>
+      <h2>Find Resources by Grade</h2>
+      <p class="muted">Choose a grade to browse the catalogue.</p>
+
       <div class="grades">
-        <span class="grade">Grade 1</span><span class="grade">Grade 2</span>
-        <span class="grade">Grade 3</span><span class="grade">Grade 4</span>
-        <span class="grade">Grade 5</span><span class="grade">Grade 6</span>
-        <span class="grade">Grade 7</span><span class="grade">Grade 8</span>
-        <span class="grade">Grade 9</span>
+        <a class="grade" href="#resources" data-jump-grade="1">Grade 1</a>
+        <a class="grade" href="#resources" data-jump-grade="2">Grade 2</a>
+        <a class="grade" href="#resources" data-jump-grade="3">Grade 3</a>
+        <a class="grade" href="#resources" data-jump-grade="4">Grade 4</a>
+        <a class="grade" href="#resources" data-jump-grade="5">Grade 5</a>
+        <a class="grade" href="#resources" data-jump-grade="6">Grade 6</a>
+        <a class="grade" href="#resources" data-jump-grade="7">Grade 7</a>
+        <a class="grade" href="#resources" data-jump-grade="8">Grade 8</a>
+        <a class="grade" href="#resources" data-jump-grade="9">Grade 9</a>
       </div>
     </section>
 
     <section class="section" id="contact">
-      <h2>Need help?</h2>
+      <h2>Need Help?</h2>
       <p>Contact TeacherMate Kenya for information about learning resources.</p>
-      <p style="margin-top: 10px;">WhatsApp / Phone: <a href="https://wa.me/254794688230">0794 688 230</a></p>
+      <p style="margin-top: 10px;">
+        WhatsApp / Phone:
+        <a href="https://wa.me/254794688230">0794 688 230</a>
+      </p>
     </section>
   </main>
 
@@ -179,49 +509,61 @@
     <p>Your Everyday Teaching Companion.</p>
     <p>© 2026 TeacherMate Kenya. All rights reserved.</p>
   </footer>
-  
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const searchBox = document.getElementById("resourceSearch");
-  const gradeFilter = document.getElementById("gradeFilter");
-  const subjectFilter = document.getElementById("subjectFilter");
-  const resourceCards = document.querySelectorAll("#resources .card");
-  
-function filterResources() {
-  const query = searchBox.value.toLowerCase().trim();
-  const grade = gradeFilter.value.toLowerCase();
-  const subject = subjectFilter.value.toLowerCase();
 
-  resourceCards.forEach(function (card) {
-    const text = card.textContent.toLowerCase();
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchBox = document.getElementById("resourceSearch");
+      const gradeFilter = document.getElementById("gradeFilter");
+      const subjectFilter = document.getElementById("subjectFilter");
+      const resourceCards = document.querySelectorAll(
+        "#resourceGrid .card"
+      );
+      const resultsCount = document.getElementById("resultsCount");
 
-    const matchesSearch = text.includes(query);
+      function filterResources() {
+        const query = searchBox.value.toLowerCase().trim();
+        const grade = gradeFilter.value;
+        const subject = subjectFilter.value.toLowerCase();
 
-    const matchesGrade = !grade ||
-      Array.from(card.querySelectorAll(".card-content p"))
-        .some(function (p) {
-          return p.textContent.toLowerCase().includes(grade);
+        let visibleCount = 0;
+
+        resourceCards.forEach(function (card) {
+          const text = card.textContent.toLowerCase();
+          const cardGrade = card.dataset.grade || "";
+          const cardSubject = card.dataset.subject || "";
+
+          const matchesSearch = text.includes(query);
+          const matchesGrade = !grade || cardGrade === grade;
+          const matchesSubject = !subject || cardSubject === subject;
+
+          const isVisible =
+            matchesSearch && matchesGrade && matchesSubject;
+
+          card.hidden = !isVisible;
+
+          if (isVisible) {
+            visibleCount++;
+          }
         });
 
-    const matchesSubject = !subject || text.includes(subject);
+        resultsCount.textContent =
+          "Showing " + visibleCount +
+          (visibleCount === 1 ? " resource" : " resources");
+      }
 
-    card.style.display =
-      matchesSearch && matchesGrade && matchesSubject ? "" : "none";
-  });
-}
+      searchBox.addEventListener("input", filterResources);
+      gradeFilter.addEventListener("change", filterResources);
+      subjectFilter.addEventListener("change", filterResources);
 
-searchBox.addEventListener("input", filterResources);
-gradeFilter.addEventListener("change", filterResources);
-subjectFilter.addEventListener("change", filterResources);
-  filterResources();
-  });
-</script>
+      document.querySelectorAll("[data-jump-grade]").forEach(function (link) {
+        link.addEventListener("click", function () {
+          gradeFilter.value = link.dataset.jumpGrade;
+          filterResources();
+        });
+      });
+
+      filterResources();
+    });
+  </script>
 </body>
 </html>
-
-
-
- 
-
-
-
