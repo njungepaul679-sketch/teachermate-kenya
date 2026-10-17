@@ -216,32 +216,33 @@ document.addEventListener("DOMContentLoaded", function () {
   const subjectFilter = document.getElementById("subjectFilter");
   const resourceCards = document.querySelectorAll("#resources .card");
 
-  function filterResources() {
-    const query = searchBox.value.toLowerCase().trim();
-    const grade = gradeFilter.value.toLowerCase();
-    const subject = subjectFilter.value.toLowerCase();
+ 
+function filterResources() {
+  const query = searchBox.value.toLowerCase().trim();
+  const grade = gradeFilter.value.toLowerCase();
+  const subject = subjectFilter.value.toLowerCase();
 
-    resourceCards.forEach(function (card) {
-      const text = card.textContent.toLowerCase();
+  resourceCards.forEach(function (card) {
+    const text = card.textContent.toLowerCase();
 
-      const matchesSearch = text.includes(query);
-     const gradeLabel = card.querySelector(".card-content p");
-const cardGrade = gradeLabel ? gradeLabel.textContent.toLowerCase() : "";
-const matchesGrade = !grade || cardGrade.includes(grade);
-      const matchesSubject = !subject || text.includes(subject);
+    const matchesSearch = text.includes(query);
 
-      card.style.display =
-        matchesSearch && matchesGrade && matchesSubject
-          ? ""
-          : "none";
-    });
-  }
+    const matchesGrade = !grade ||
+      Array.from(card.querySelectorAll(".card-content p"))
+        .some(function (p) {
+          return p.textContent.toLowerCase().includes(grade);
+        });
 
-  searchBox.addEventListener("input", filterResources);
-  gradeFilter.addEventListener("change", filterResources);
-  subjectFilter.addEventListener("change", filterResources);
-});
-</script>
+    const matchesSubject = !subject || text.includes(subject);
+
+    card.style.display =
+      matchesSearch && matchesGrade && matchesSubject ? "" : "none";
+  });
+}
+
+searchBox.addEventListener("input", filterResources);
+gradeFilter.addEventListener("change", filterResources);
+subjectFilter.addEventListener("change", filterResources);
 
  
 
