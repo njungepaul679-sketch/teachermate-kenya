@@ -225,7 +225,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const text = card.textContent.toLowerCase();
 
       const matchesSearch = text.includes(query);
-      const matchesGrade = !grade || text.includes(grade);
+     const gradeLabel = card.querySelector(".card-content p");
+const cardGrade = gradeLabel ? gradeLabel.textContent.toLowerCase() : "";
+const matchesGrade = !grade || cardGrade.includes(grade);
       const matchesSubject = !subject || text.includes(subject);
 
       card.style.display =
