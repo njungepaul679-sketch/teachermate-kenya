@@ -158,19 +158,35 @@
   </footer>
   
 <script>
+ 
+<script>
   const searchBox = document.getElementById("resourceSearch");
+  const gradeFilter = document.getElementById("gradeFilter");
+  const subjectFilter = document.getElementById("subjectFilter");
   const resourceCards = document.querySelectorAll("#resources .card");
 
-  if (searchBox) {
-    searchBox.addEventListener("input", function () {
-      const query = this.value.toLowerCase().trim();
+  function filterResources() {
+    const query = searchBox.value.toLowerCase().trim();
+    const grade = gradeFilter.value.toLowerCase();
+    const subject = subjectFilter.value.toLowerCase();
 
-      resourceCards.forEach(function (card) {
-        const text = card.textContent.toLowerCase();
-        card.style.display = text.includes(query) ? "" : "none";
-      });
+    resourceCards.forEach(function(card) {
+      const text = card.textContent.toLowerCase();
+
+      const matchesSearch = text.includes(query);
+      const matchesGrade = !grade || text.includes(grade);
+      const matchesSubject = !subject || text.includes(subject);
+
+      card.style.display =
+        matchesSearch && matchesGrade && matchesSubject ? "" : "none";
     });
   }
+
+  searchBox.addEventListener("input", filterResources);
+  gradeFilter.addEventListener("change", filterResources);
+  subjectFilter.addEventListener("change", filterResources);
+</script>
+
 </script>
 
 </body>
